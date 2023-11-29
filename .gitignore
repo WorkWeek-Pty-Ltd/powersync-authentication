@@ -2,3 +2,4 @@
 .branches
 .temp
 node_modules
+.vscode/settings.json
