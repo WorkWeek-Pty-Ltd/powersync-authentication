@@ -120,6 +120,8 @@ serve(async (req: Request) => {
         JSON.stringify({
           token: token,
           powersync_url: powerSyncUrl,
+          organisationId: organisation.id,
+          organisationName: organisation.name,
         }),
         {
           headers: { 'Content-Type': 'application/json' },
