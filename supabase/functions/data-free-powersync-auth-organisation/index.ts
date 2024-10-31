@@ -55,9 +55,9 @@ serve(async (req: Request) => {
 
     const dataFree = data.data_free_enabled;
     const powerSyncUrl = dataFree
-      ? // ? Deno.env.get("POWERSYNC_DATA_FREE_URL")!
-        "https://mtn-346.datafree7.co"
-      : Deno.env.get("POWERSYNC_URL")!;
+      ? Deno.env.get("POWERSYNC_DATA_FREE_URL")!
+      : // "https://mtn-346.datafree7.co"
+        Deno.env.get("POWERSYNC_URL")!;
 
     // Create JWT with organisation ID
     const token = await new jose.SignJWT({})
