@@ -1,3 +1,8 @@
+// this new edge function replaces powersync-auth-organisation function
+// it is used to get the correct powersync url and token for a given organisation based on the data_free_enabled flag
+// this is used by the powersync client to connect to the correct server
+// the audience is always the underlying powersync url, not the data free one
+
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import * as jose from "https://deno.land/x/jose@v4.14.4/index.ts";
 import * as base64 from "https://deno.land/std@0.196.0/encoding/base64.ts";
@@ -68,7 +73,7 @@ serve(async (req: Request) => {
       .setSubject(organisationId)
       .setIssuedAt()
       .setIssuer(Deno.env.get("SUPABASE_URL")!)
-      .setAudience(powerSyncUrl)
+      .setAudience(Deno.env.get("POWERSYNC_URL")!) // audience is the always the underlying powersync url, not the data free one
       .setExpirationTime("5m")
       .sign(powerSyncKey);
     return new Response(
